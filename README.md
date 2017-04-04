@@ -31,7 +31,11 @@ Parts list:
 
 ## Software design
 
-### Dependencies
+### Google Script
+
+[TBD]
+
+### Dependencies 
 
   - [ArduinoJson library](https://github.com/bblanchon/ArduinoJson)
 
@@ -39,4 +43,4 @@ Parts list:
 
 Change the constants according to your needs:
 
-  - WAKEUP_RATE: How long should the device be sleeping between each polling.
+  - DEFAULT_WAKEUP_RATE: How long should the device be sleeping between each polling. This is the default value which will be overriden at the first call to the Google Script.

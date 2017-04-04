@@ -16,20 +16,19 @@
     You should have received a copy of the GNU General Public License
     along with GCalendarIrrigation.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-void initSerial(void) {
-  Serial.begin(9600);
-  Serial.println();
-  //Serial.setDebugOutput(true);
+ 
+ void openValve(void) {
+  actuateValve(true);
 }
 
-void initFS(void) {
-  SPIFFS.begin();
+void closeValve(void) {
+  actuateValve(false);
 }
 
-void initIO(void) {
-  pinMode(N_FAULT, INPUT_PULLUP);
-  pinMode(OPEN, OUTPUT);
-  pinMode(CLOSE, OUTPUT);
+void actuateValve(bool openValve) {
+  int pin = openValve ? OPEN : CLOSE;
+  digitalWrite(pin, HIGH);
+  delay(10);
+  digitalWrite(pin, LOW);
 }
 

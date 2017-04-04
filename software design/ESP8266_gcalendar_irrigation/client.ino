@@ -17,19 +17,5 @@
     along with GCalendarIrrigation.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-void initSerial(void) {
-  Serial.begin(9600);
-  Serial.println();
-  //Serial.setDebugOutput(true);
-}
-
-void initFS(void) {
-  SPIFFS.begin();
-}
-
-void initIO(void) {
-  pinMode(N_FAULT, INPUT_PULLUP);
-  pinMode(OPEN, OUTPUT);
-  pinMode(CLOSE, OUTPUT);
-}
+ 
 

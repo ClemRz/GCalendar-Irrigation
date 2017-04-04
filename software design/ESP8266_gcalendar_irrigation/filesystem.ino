@@ -14,79 +14,8 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with EspDataLogger.  If not, see <http://www.gnu.org/licenses/>.
+    along with GCalendarIrrigation.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-void saveData(void) {
-  File file = SPIFFS.open(DATA_FILE_PATH, "a");
-  if (file) {
-    file.print(millis()); file.print(F(",")); file.print(_celsiusHundredths); file.print(F(",")); file.println(_humidityPercent);
-    file.close();
-#if DEBUG
-  } else {
-    Serial.println(F("file open failed"));
-#endif  //DEBUG
-  }
-}
-
-void saveHeaders(void) {
-  File file = SPIFFS.open(DATA_FILE_PATH, "a");
-  if (file) {
-    file.print(_dateTime); file.print(F(", rate: ")); file.print(_wakeupRate); file.print(F(", version: ")); file.println(VERSION);
-    file.close();
-#if DEBUG
-  } else {
-    Serial.println(F("file open failed"));
-#endif  //DEBUG
-  }
-}
-
-String getDataAttributes(void) {
-  File file = SPIFFS.open(DATA_FILE_PATH, "r");
-  String out = "";
-  if (file) out.concat(F("File: ")); out.concat(file.name()); out.concat(F(" ")); out.concat(file.size()); out.concat(F("b/64kb"));
-  return out;
-}
-
-void retrieveDataToSerial(void) {
-  File file = SPIFFS.open(DATA_FILE_PATH, "r");
-  if (!file) {
-    Serial.println(F("file open failed"));
-    return;
-  }
-  Serial.println(F("-- bof --"));
-  while(file.available()) {
-    Serial.println(file.readStringUntil('\n'));
-  }
-  Serial.println(F("-- eof --"));
-}
-
-String retrieveRawData(void) {
-  File file = SPIFFS.open(DATA_FILE_PATH, "r");
-  String out = "";
-  if (!file) {
-    out.concat(F("no data"));
-  } else {
-    while(file.available()) {
-      out.concat(file.readStringUntil('\n')); out.concat(F("\n"));
-    }
-  }
-  out.concat(_dateTime); out.concat(F("\n"));
-  return out;
-}
-
-void deleteData(void) {
-  if (SPIFFS.remove(DATA_FILE_PATH)) {
-#if DEBUG
-    Serial.print(DATA_FILE_PATH); Serial.println(F(" deleted"));
-#endif  //DEBUG
-    saveHeaders();
-#if DEBUG
-  } else {
-    Serial.println(F("file delete failed"));
-#endif  //DEBUG
-  }
-}
 
 void setWakeupRate(void) {
   int rate = DEFAULT_WAKEUP_RATE;
@@ -100,15 +29,14 @@ void setWakeupRate(void) {
     Serial.println(F("file open failed"));
 #endif  //DEBUG
   }
-  _wakeupRate = rate;
+  //_wakeupRate = rate;
 }
 
 void saveWakeupRate(void) {
   File file = SPIFFS.open(CONFIG_FILE_PATH, "w");
   if (file) {
-    file.println(_wakeupRate);
+    //file.println(_wakeupRate);
     file.close();
-    saveHeaders();
 #if DEBUG
   } else {
     Serial.println(F("file open failed"));

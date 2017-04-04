@@ -14,7 +14,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with EspDataLogger.  If not, see <http://www.gnu.org/licenses/>.
+    along with GCalendarIrrigation.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #ifndef _STRUCTURES_H
@@ -26,6 +26,6 @@ typedef struct {
     int celsiusHundredths;
     int humidityPercent;
   };
-} RtcData;
+} Config;
 
 #endif  //_STRUCTURES_H

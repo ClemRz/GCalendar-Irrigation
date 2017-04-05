@@ -34,15 +34,30 @@ Parts list:
 
 ### Google Script
 
-[TBD]
+#### Code
+  
+You can see the script here: [https://script.google.com/d/...](https://script.google.com/d/1ywsSWqpS012G6y6WJX9rr8T4_rACkuGmcm7dGJIzXeH75jpKXCeG1Bua/edit?usp=sharing)
 
-### Dependencies 
+#### Parameters
+
+  - `_calendarName`: the calendar name that is going to be taken into account
+  - `_checkInRate`: the polling rate
+
+### ESP8266 Code
+
+#### Dependencies 
 
   - [ArduinoJson library](https://github.com/bblanchon/ArduinoJson)
   - [HTTPS Redirect library](https://github.com/electronicsguy/ESP8266/tree/master/HTTPSRedirect)
 
-### Parameters
+#### Parameters
 
 Change the constants according to your needs:
 
-  - DEFAULT_WAKEUP_RATE: How long should the device be sleeping between each polling. This is the default value which will be overriden at the first call to the Google Script.
+  - `DEFAULT_WAKEUP_RATE`: how long should the device be sleeping between each polling. This is the default value which will be overriden at the first call to the Google Script
+  - `SSID`: your wifi's SSID
+  - `PASSWORD`: your wifi's password
+  - `SCRIPT_ID`: your Google Script ID (can be found in the deploy url)
+  - `DEBUG`: turn to 1 if you want to see debug information in the console log
+  - `CLOSE`: ESP pin number that is connected to the _close_ input of the driver
+  - `OPEN`: ESP pin number that is connected to the _open_ input of the driver

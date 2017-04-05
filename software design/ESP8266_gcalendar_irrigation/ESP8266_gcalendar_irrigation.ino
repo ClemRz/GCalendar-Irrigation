@@ -34,9 +34,9 @@
  * ======================================
 */
 #define DEFAULT_POLLING_RATE   5*MINUTE
-#define SSID                  "YOUR_SSID"
-#define PASSWORD              "YOUR_PASSWORD"
-#define SCRIPT_ID             "YOUR_GOOGLE_SCRIPT_ID"
+#define SSID                  "GENERAL" //"rz_ntw"
+#define PASSWORD              "LEARNFROMYESTERDAYLIVEFORTODAY" //"tortolitos"
+#define SCRIPT_ID             "AKfycbxr26CjU_9MvAyYFBeOgVZiXFYdIOL-wYoGzBJdLxmXV2jkJQI"
 #define DEBUG                 1
 // ======================================
 
@@ -111,6 +111,7 @@ void sleep() {
   Serial.print(_pollingRate);
   Serial.println(F("s."));
 #endif  //DEBUG
+  if (_pollingRate == 0) _pollingRate = 1;
   ESP.deepSleep(_pollingRate * MICROSEC);
 }
 

@@ -25,15 +25,6 @@ void closeValve(void) {
   actuateValve(false);
 }
 
-void lookForFault(void) {
-  bool isInFault = digitalRead(N_FAULT) == LOW;
-#if DEBUG
-  if (isInFault) {
-    Serial.println(F("Driver is showing a fault"));
-  }
-#endif
-}
-
 void actuateValve(bool openValve) {
 #if DEBUG
   Serial.print(openValve ? F("Open") : F("Close")); Serial.println(F(" the valve."));
@@ -44,5 +35,14 @@ void actuateValve(bool openValve) {
   lookForFault();
   delay(5);
   digitalWrite(pin, LOW);
+}
+
+void lookForFault(void) {
+  bool isInFault = digitalRead(N_FAULT) == LOW;
+#if DEBUG
+  if (isInFault) {
+    Serial.println(F("Driver is showing a fault"));
+  }
+#endif
 }
 

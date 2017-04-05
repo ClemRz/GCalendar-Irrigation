@@ -28,7 +28,7 @@ Parts list:
   - 3 x Straight male headers
   - Some wires
 
-![Sketch](res/sketch.png)
+![Sketch](res/sketch_bb.png)
 
 ## Software design
 

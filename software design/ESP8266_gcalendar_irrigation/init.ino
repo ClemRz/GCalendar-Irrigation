@@ -23,10 +23,6 @@ void initSerial(void) {
   //Serial.setDebugOutput(true);
 }
 
-void initFS(void) {
-  SPIFFS.begin();
-}
-
 void initIO(void) {
   pinMode(N_FAULT, INPUT_PULLUP);
   pinMode(OPEN, OUTPUT);

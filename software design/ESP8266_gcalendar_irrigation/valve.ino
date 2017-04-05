@@ -26,6 +26,9 @@ void closeValve(void) {
 }
 
 void actuateValve(bool openValve) {
+#if DEBUG
+  Serial.print(openValve ? F("Open") : F("Close")); Serial.println(F(" the valve."));
+#endif
   int pin = openValve ? OPEN : CLOSE;
   digitalWrite(pin, HIGH);
   delay(10);

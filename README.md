@@ -15,17 +15,18 @@
 
 Parts list:
 
-  - 1 x Resistor (10KΩ)
   - 3 x Capacitors (22µF, 0.1µF, 4700µF)
   - 1 x DC motor driver (DRV8872 in this case)
   - 1 x ESP8266 (version ESP07)
-  - 1 x Voltage regulator (LT1521CST-3.3 for instance)
+  - 1 x 3.3V Voltage regulator (LT1529-3.3 for instance)
   - 1 x 12V 1.5A charger
   - 1 x Female plug (same size as the charger's plug)
   - 1 x Prototyping board
   - 1 x Latching solenoid valve (scavenged from an Orbit 58874N)
   - 3 x Momentary push buttons
   - 1 x Rocker switch
+  - 3 x Straight male headers
+  - Some wires
 
 ![Sketch](res/sketch.png)
 
@@ -38,6 +39,7 @@ Parts list:
 ### Dependencies 
 
   - [ArduinoJson library](https://github.com/bblanchon/ArduinoJson)
+  - [HTTPS Redirect library](https://github.com/electronicsguy/ESP8266/tree/master/HTTPSRedirect)
 
 ### Parameters
 

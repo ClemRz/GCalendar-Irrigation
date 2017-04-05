@@ -17,30 +17,33 @@
     along with GCalendarIrrigation.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-void setWakeupRate(void) {
-  int rate = DEFAULT_WAKEUP_RATE;
-  File file = SPIFFS.open(CONFIG_FILE_PATH, "r");
-  if (file) {
-    while(file.available()) {
-      rate = file.readStringUntil('\n').toInt();
+void initWiFi(void) {
+#if DEBUG
+  Serial.println(F("Start WiFi"));
+#endif
+  WiFi.persistent(true);
+  if (WiFi.status() != WL_CONNECTED) {
+    WiFi.begin(SSID, PASSWORD);
+    while (WiFi.status() != WL_CONNECTED && _attempts <= MAX_WIFI_ATTEMPTS) {
+      delay(500);
+#if DEBUG
+      Serial.print(F("."));
+#endif
+      _attempts++;
     }
-#if DEBUG
-  } else {
-    Serial.println(F("file open failed"));
-#endif  //DEBUG
   }
-  //_wakeupRate = rate;
-}
-
-void saveWakeupRate(void) {
-  File file = SPIFFS.open(CONFIG_FILE_PATH, "w");
-  if (file) {
-    //file.println(_wakeupRate);
-    file.close();
 #if DEBUG
+  Serial.println();
+  if (_attempts > MAX_WIFI_ATTEMPTS) {
+    Serial.print(F("Failed to connect to "));
+    Serial.println(SSID);
   } else {
-    Serial.println(F("file open failed"));
-#endif  //DEBUG
+    Serial.print(F("Connected to "));
+    Serial.println(SSID);
+    Serial.print(F("IP address: "));
+    Serial.println(WiFi.localIP());
+    Serial.print(F("Mac addresss: "));
+    Serial.println(WiFi.macAddress());
   }
+#endif
 }
-

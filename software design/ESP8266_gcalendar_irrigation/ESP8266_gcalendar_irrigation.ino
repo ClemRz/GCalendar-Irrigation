@@ -33,10 +33,10 @@
  *      User defined constants
  * ======================================
 */
-#define DEFAULT_POLLING_RATE   5*MINUTE
-#define SSID                  "GENERAL" //"rz_ntw"
-#define PASSWORD              "LEARNFROMYESTERDAYLIVEFORTODAY" //"tortolitos"
-#define SCRIPT_ID             "AKfycbxr26CjU_9MvAyYFBeOgVZiXFYdIOL-wYoGzBJdLxmXV2jkJQI"
+#define DEFAULT_POLLING_RATE  5*MINUTE
+#define SSID                  "YOUR_SSID"
+#define PASSWORD              "YOUR_PASSWORD"
+#define SCRIPT_ID             "YOUR_GOOGLE_SCRIPT_ID"
 #define DEBUG                 1
 // ======================================
 

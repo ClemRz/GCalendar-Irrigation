@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2016 Clément Ronzon
+    Copyright (C) 2017 Clément Ronzon
 
     This file is part of EspDataLogger.
 

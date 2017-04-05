@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2016 Clément Ronzon
+    Copyright (C) 2017 Clément Ronzon
 
     This file is part of EspDataLogger.
 
@@ -25,13 +25,24 @@ void closeValve(void) {
   actuateValve(false);
 }
 
+void lookForFault(void) {
+  bool isInFault = digitalRead(N_FAULT) == LOW;
+#if DEBUG
+  if (isInFault) {
+    Serial.println(F("Driver is showing a fault"));
+  }
+#endif
+}
+
 void actuateValve(bool openValve) {
 #if DEBUG
   Serial.print(openValve ? F("Open") : F("Close")); Serial.println(F(" the valve."));
 #endif
   int pin = openValve ? OPEN : CLOSE;
   digitalWrite(pin, HIGH);
-  delay(10);
+  delay(5);
+  lookForFault();
+  delay(5);
   digitalWrite(pin, LOW);
 }
 

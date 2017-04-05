@@ -59,5 +59,7 @@ function getEvent(item) {
     response.nextCheckIn = startsWithin;
   }
   
+  response.nextCheckIn++;
+  
   return response;
 }

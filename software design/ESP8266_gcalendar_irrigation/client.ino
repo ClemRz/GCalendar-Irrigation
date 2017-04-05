@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2016 Clément Ronzon
+    Copyright (C) 2017 Clément Ronzon
 
     This file is part of EspDataLogger.
 
@@ -20,6 +20,7 @@ String httpsGet(void) {
   HTTPSRedirect* client = new HTTPSRedirect(HTTPS_PORT);
   bool connected = false;
   for (int i=0; i<MAX_HTTPS_ATTEMPTS; i++){
+    yield();
     int retval = client->connect(HOST, HTTPS_PORT);
     if (retval == 1) {
        connected = true;

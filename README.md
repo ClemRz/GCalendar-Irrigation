@@ -32,13 +32,7 @@ Parts list:
 
 ## Software design
 
-### Google Script
-
-#### Code
-  
-You can see the script here: [https://script.google.com/d/...](https://script.google.com/d/1ywsSWqpS012G6y6WJX9rr8T4_rACkuGmcm7dGJIzXeH75jpKXCeG1Bua/edit?usp=sharing)
-
-#### Parameters
+### Google Script parameters
 
   - `_calendarName`: the calendar name that is going to be taken into account
   - `_checkInRate`: the polling rate

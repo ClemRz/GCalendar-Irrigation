@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2016 Clément Ronzon
+    Copyright (C) 2017 Clément Ronzon
 
     This file is part of EspDataLogger.
 
@@ -25,6 +25,7 @@ void initWiFi(void) {
   if (WiFi.status() != WL_CONNECTED) {
     WiFi.begin(SSID, PASSWORD);
     while (WiFi.status() != WL_CONNECTED && _attempts <= MAX_WIFI_ATTEMPTS) {
+      yield();
       delay(500);
 #if DEBUG
       Serial.print(F("."));

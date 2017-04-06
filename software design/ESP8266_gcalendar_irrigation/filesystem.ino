@@ -17,19 +17,29 @@
     along with GCalendarIrrigation.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-void initSerial(void) {
-  Serial.begin(9600);
-  Serial.println();
-  //Serial.setDebugOutput(true);
+ void readOfflineTime(void) {
+  File file = SPIFFS.open(CONFIG_FILE_PATH, "r");
+  if (file) {
+    while(file.available()) {
+      _offlineTime = file.readStringUntil('\n').toInt();
+    }
+    file.close();
+#if DEBUG
+  } else {
+    Serial.println(F("file open failed"));
+#endif
+  }
 }
 
-void initIO(void) {
-  pinMode(N_FAULT, INPUT_PULLUP);
-  pinMode(OPEN, OUTPUT);
-  pinMode(CLOSE, OUTPUT);
-}
-
-void initFS(void) {
-  SPIFFS.begin();
+void writeOfflineTime(void) {
+  File file = SPIFFS.open(CONFIG_FILE_PATH, "w");
+  if (file) {
+    file.println(_offlineTime);
+    file.close();
+#if DEBUG
+  } else {
+    Serial.println(F("file open failed"));
+#endif
+  }
 }
 

@@ -20,6 +20,7 @@
 #include <ESP8266WiFi.h>
 #include "HTTPSRedirect.h"
 #include <ArduinoJson.h>
+#include "FS.h"
 
 #define MICROSEC              1000000L
 #define MILLISEC              1000L
@@ -34,9 +35,11 @@
  * ======================================
 */
 #define DEFAULT_POLLING_RATE  5*MINUTE
-#define SSID                  "YOUR_SSID"
-#define PASSWORD              "YOUR_PASSWORD"
-#define SCRIPT_ID             "YOUR_GOOGLE_SCRIPT_ID"
+#define DEFAULT_WATERING_RATE 1*DAY
+#define DEFAULT_WATERING_TIME 2*MINUTE
+#define SSID                  "rz_ntw"
+#define PASSWORD              "tortolitos"
+#define SCRIPT_ID             "AKfycbxr26CjU_9MvAyYFBeOgVZiXFYdIOL-wYoGzBJdLxmXV2jkJQI"
 #define DEBUG                 1
 // ======================================
 
@@ -57,15 +60,21 @@
 // Deep-sleep time limit
 #define MAX_SLEEP_TIME        71L*MINUTE
 
+// File system configs
+#define CONFIG_FILE_PATH      "/cfg.json"
+
 // Global variables
 HTTPSRedirect* client = NULL;
 long _pollingRate = DEFAULT_POLLING_RATE;
-int _attempts = 0;
+int _attempts = 0,
+    _offlineTime = 0;
 
 void setup() {
 #if DEBUG
   initSerial();
 #endif
+  initFS();
+  readOfflineTime();
   initIO();
   initWiFi();
 }
@@ -77,7 +86,15 @@ void loop() {
     if (response != "") {
       process(response);
     } else closeValve();
-  } else closeValve();
+  } else {
+    if (_offlineTime >= DEFAULT_WATERING_RATE) {
+      _pollingRate = DEFAULT_WATERING_TIME;
+      _offlineTime = 0;
+      openValve();
+    } else closeValve();
+  }
+  _offlineTime += millis()/MILLISEC + _pollingRate;
+  writeOfflineTime();
   sleep();
 }
 
@@ -91,6 +108,7 @@ void process(String response) {
       if (_pollingRate > MAX_SLEEP_TIME) _pollingRate = MAX_SLEEP_TIME;
       if (root["data"]["openValve"]) openValve();
       if (root["data"]["closeValve"]) closeValve();
+      _offlineTime = 0;
     } else {
 #if DEBUG
       Serial.print(F("Unsuccessful response: ")); Serial.println(status);
